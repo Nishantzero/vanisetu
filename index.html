@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vanisetu - Citizen Complaint System</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- SCREEN: LOGIN -->
+    <div id="screen-login" class="container">
+      <div class="glass-panel">
+        <!-- Language Switcher on First Page -->
+        <div
+          style="
+            text-align: center;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+          "
+        >
+          <button
+            id="lang-en-btn"
+            class="lang-toggle"
+            style="
+              border-color: var(--primary-glow);
+              color: var(--primary-glow);
+            "
+          >
+            English
+          </button>
+          <button id="lang-hi-btn" class="lang-toggle">हिंदी</button>
+        </div>
+
+        <h1>VANISETU</h1>
+        <div class="subtitle" data-i18n="subtitle">
+          Voice-First Citizen Complaint System
+        </div>
+        <h2 data-i18n="login_title">Login</h2>
+        <div class="input-group">
+          <label for="phone-input" data-i18n="mobile_label"
+            >Mobile Number</label
+          >
+          <input
+            type="number"
+            id="phone-input"
+            data-i18n-placeholder="mobile_placeholder"
+            placeholder="Enter 10-digit number"
+            autocomplete="off"
+          />
+        </div>
+        <button id="login-btn">
+          <span data-i18n="continue_btn">Continue</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- SCREEN: MAIN / INPUT -->
+    <div id="screen-main" class="container hidden">
+      <div class="top-nav">
+        <div class="user-badge">
+          <i class="fa-solid fa-user"></i>
+          <span id="user-id-display">USER-XXXX</span>
+        </div>
+      </div>
+
+      <div class="glass-panel">
+        <h2 data-i18n="record_title">Record Complaint</h2>
+
+        <div class="mic-wrapper">
+          <button id="mic-btn" class="mic-btn">
+            <i class="fa-solid fa-microphone"></i>
+          </button>
+          <p
+            class="mt-1"
+            id="mic-status"
+            data-i18n="tap_speak"
+            style="color: var(--text-muted); font-size: 0.9rem"
+          >
+            Tap to speak
+          </p>
+        </div>
+
+        <div class="input-group">
+          <textarea
+            id="transcript-area"
+            data-i18n-placeholder="speak_placeholder"
+            placeholder="Speak or type your complaint here..."
+          ></textarea>
+        </div>
+
+        <div class="category-section">
+          <h3 data-i18n="select_manual">Or Select Category Manually</h3>
+          <div class="category-grid">
+            <button class="category-btn" data-category="Water">
+              <i class="fa-solid fa-droplet"></i>
+              <span data-i18n="cat_water">Water</span>
+            </button>
+            <button class="category-btn" data-category="Roads">
+              <i class="fa-solid fa-road"></i>
+              <span data-i18n="cat_roads">Roads</span>
+            </button>
+            <button class="category-btn" data-category="Electricity">
+              <i class="fa-solid fa-bolt"></i>
+              <span data-i18n="cat_electricity">Electricity</span>
+            </button>
+            <button class="category-btn" data-category="Sanitation">
+              <i class="fa-solid fa-trash"></i>
+              <span data-i18n="cat_sanitation">Sanitation</span>
+            </button>
+            <button class="category-btn" data-category="Others">
+              <i class="fa-solid fa-list"></i>
+              <span data-i18n="cat_others">Others</span>
+            </button>
+          </div>
+        </div>
+
+        <button id="next-to-camera-btn">
+          <span data-i18n="next_step">Next Step</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- SCREEN: CAMERA EVIDENCE -->
+    <div id="screen-camera" class="container hidden">
+      <div class="glass-panel">
+        <h2 data-i18n="attach_evidence">Attach Evidence</h2>
+        <p
+          class="text-center"
+          data-i18n="capture_desc"
+          style="margin-bottom: 1.5rem; color: var(--text-muted)"
+        >
+          Capture a photo of the issue for better resolution.
+        </p>
+
+        <div class="media-container mt-1">
+          <span
+            class="media-overlay-text"
+            id="camera-loading"
+            data-i18n="init_camera"
+            >Initializing Camera...</span
+          >
+          <video id="camera-preview" autoplay playsinline></video>
+          <canvas id="camera-canvas" class="hidden"></canvas>
+        </div>
+
+        <button id="capture-btn">
+          <i class="fa-solid fa-camera"></i>
+          <span data-i18n="capture_img">Capture Image</span>
+        </button>
+        <div class="text-center mt-1">
+          <input type="file" id="file-upload" accept="image/*" class="hidden" />
+          <button
+            id="upload-btn"
+            class="secondary"
+            style="width: auto; padding: 0.5rem 1rem; font-size: 0.8rem"
+          >
+            <i class="fa-solid fa-upload"></i>
+            <span data-i18n="upload_device">Upload from Device</span>
+          </button>
+        </div>
+        <button id="skip-camera-btn" class="secondary mt-1">
+          <span data-i18n="skip_btn">Skip</span>
+          <i class="fa-solid fa-forward"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- SCREEN: RESULT / SUMMARY -->
+    <div id="screen-result" class="container hidden">
+      <div class="glass-panel">
+        <h2 data-i18n="confirm_details">Confirm Details</h2>
+
+        <div class="result-box">
+          <div class="result-item">
+            <div class="result-label" data-i18n="res_cat">Category</div>
+            <div
+              class="result-value"
+              id="res-category"
+              style="font-weight: 600; color: var(--primary-glow)"
+            >
+              -
+            </div>
+          </div>
+          <div class="result-item">
+            <div class="result-label" data-i18n="res_desc">
+              Complaint Description
+            </div>
+            <div class="result-value" id="res-desc">-</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label" data-i18n="res_loc">
+              Location Evidence
+            </div>
+            <div class="result-value">
+              <a href="#" id="res-location" target="_blank" class="map-link"
+                ><i class="fa-solid fa-map-location-dot"></i>
+                <span data-i18n="res_view_map">View on Map</span></a
+              >
+            </div>
+          </div>
+          <div class="result-item mt-1">
+            <div class="result-label" data-i18n="res_img">Attached Image</div>
+            <img
+              id="res-image"
+              src=""
+              alt="Evidence"
+              class="hidden"
+              style="
+                width: 100%;
+                max-height: 200px;
+                object-fit: cover;
+                border-radius: 8px;
+                margin-top: 0.5rem;
+                border: 1px solid var(--border-color);
+              "
+            />
+          </div>
+        </div>
+
+        <button id="submit-complaint-btn">
+          <i class="fa-solid fa-paper-plane"></i>
+          <span data-i18n="submit_auth">Submit to Authority</span>
+        </button>
+        <button id="back-to-edit-btn" class="secondary mt-1">
+          <i class="fa-solid fa-pen"></i>
+          <span data-i18n="edit_details">Edit Details</span>
+        </button>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

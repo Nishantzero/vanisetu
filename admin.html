@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vanisetu Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- ADMIN LOGIN -->
+    <div id="admin-login-screen" class="container">
+      <div class="glass-panel">
+        <h1><i class="fa-solid fa-shield-halved"></i> Admin Portal</h1>
+        <div class="subtitle">VANISETU Headquarters</div>
+        <div class="input-group mt-2">
+          <label for="admin-pwd">Administrator Password</label>
+          <input
+            type="password"
+            id="admin-pwd"
+            placeholder="Enter password (admin@123)"
+          />
+        </div>
+        <button id="admin-login-btn">
+          Access Dashboard <i class="fa-solid fa-unlock"></i>
+        </button>
+        <div class="text-center mt-1" style="margin-top: 2rem">
+          <a
+            href="index.html"
+            style="
+              color: var(--text-muted);
+              font-size: 0.9rem;
+              text-decoration: none;
+              transition: color 0.3s;
+            "
+            ><i class="fa-solid fa-arrow-left"></i> Back to User Portal</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- ADMIN DASHBOARD -->
+    <div id="admin-dashboard" class="admin-container hidden">
+      <div class="admin-header">
+        <div>
+          <h1
+            style="
+              text-align: left;
+              background: none;
+              -webkit-text-fill-color: white;
+              font-size: 2rem;
+            "
+          >
+            Dashboard
+          </h1>
+          <p>Manage and track all citizen reports</p>
+        </div>
+        <button
+          id="admin-logout-btn"
+          class="secondary"
+          style="width: auto; margin: 0"
+        >
+          <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </button>
+      </div>
+
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Tracking ID / User</th>
+              <th>Category</th>
+              <th>Complaint Details</th>
+              <th>Location</th>
+              <th>Evidence</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="complaints-table-body">
+            <!-- Data injected here -->
+          </tbody>
+        </table>
+      </div>
+
+      <div
+        id="empty-state"
+        class="text-center hidden"
+        style="
+          padding: 4rem 2rem;
+          color: var(--text-muted);
+          background: var(--surface-color);
+          border-radius: 16px;
+          border: 1px solid var(--border-color);
+          margin-top: 2rem;
+        "
+      >
+        <i
+          class="fa-solid fa-inbox"
+          style="font-size: 4rem; margin-bottom: 1.5rem; opacity: 0.3"
+        ></i>
+        <h3>No Complaints Found</h3>
+        <p style="margin-top: 0.5rem">
+          New citizen reports will appear here automatically.
+        </p>
+      </div>
+    </div>
+
+    <script src="admin.js"></script>
+  </body>
+</html>
